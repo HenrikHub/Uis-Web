@@ -1,1 +1,136 @@
-/* write CSS here */
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans");
+
+/*
+General:
+ */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+p, a, h1{
+    margin-left:10px;
+    margin-right:10px;
+     font-family: "Verdana", "sans-serif";
+
+ }
+
+h2,h3{
+    font-family:"Open Sans","sans-serif";
+    margin-left:10px;
+    margin-right:10px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+/*
+Headings:
+ */
+
+
+
+#header{
+    background-color: #4169e1;
+    border-style: outset;
+    border-width: 1px;
+    border-color: #00008b;
+
+
+    width: 100%;
+
+
+
+
+
+}
+#header h1{
+margin-bottom:0;
+    color: white;
+    text-shadow: 2px 2px #333;
+
+
+}
+#header h2{
+    margin-top:0;
+    color: white;
+    text-shadow: 2px 2px #333;
+    border-top:0;
+    font-size:1.2em;
+    font-style: italic;
+    font-family: "Garamond", "serif";
+
+}
+
+
+/*
+Content:
+ */
+#content h2{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #999999;
+}
+
+.rank{
+    color:white;
+    background-color: black;
+}
+
+#content p{
+
+
+   text-align: justify;
+    text-indent:2em;
+    color:#999999;
+}
+#content p::first-line{
+    color: black;
+}
+#content a{
+    color: blue;
+}
+
+
+#footer{
+    background-color: black;
+    position:relative;
+    width:100%;
+    bottom:0;
+    left:0;
+    color:white;
+
+}
+
+#calendar  a{
+    color:white;
+
+}
+
+#calendar ul{
+    color:white;
+    list-style-type:circle;
+}
+
+
+
+#calendar ul li:nth-child(1){
+    list-style-type:disc;
+}
+#calendar ul li:nth-child(2){
+    list-style-type:disc;
+    font-weight:bold;
+}
+
+#footer p{
+    text-align:center;
+    color:yellow;
+    font-style:oblique;
+
+}
