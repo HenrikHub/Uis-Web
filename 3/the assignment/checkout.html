@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 
@@ -10,20 +13,71 @@
 
 
 <header>
-
+    <img src="https://goo.gl/k197Xs">
+    <nav>
+        <a href="index.html">Properties | </a>
+        <a href="property.html">Special deals | </a>
+        <a href="checkout.html">Checkout</a>
+    </nav>
 </header>
+
+
 
 <main>
 
-    <form id="røros">
+    <form id="checkout_property1">
+
+    <div class="box">
+        <img src="images/property_1.png" alt="property 1">
+        <h2>Holiday home røros</h2>
+        <p> Some small details about the property<p>
+
+    </div>
+
+    <div class="box">
+
+        <h1> Checkout </h1>
+
+    </div>
+
+        <fieldset class="box">
+            <label>Check-in<input type="date" value="InnDate_1"  readonly /></label>
+            <br>
+            <label>Check-out<input type="date" value= InnDate_1+days_1 readonly /></label>
+
+        </fieldset>
+
+        <fieldset class="box">
+
+        <label>Name:<input type="text" name="name" size="20" /></label>
+        <br>
+        <label>Street: <input type="text" name="street" size="20" /> </label>
+        <br>
+        <label>City: <input type="text" name="city" size="20" /> </label>
+        <br>
+        <label>Postcode: <input type="number" name="postcode" size="5" /> </label>
+        <br>
+        <label>Country:<select name="country">
+            <option value="1" selected>Norway</option>
+            <option value="2">Denmark</option>
+            <option value="3">Sweden</option>
+            <option value="4">Finland</option>
+            </select>
+        </label>
+
+    </fieldset>
+
+        <fieldset class="box">
+            <label>Comment: <textarea name="comment" maxlength="30" rows="4" ></textarea>  </label>
 
 
+        </fieldset>
+
+        <fieldset class="box">
+            <input type="submit" value="book property" />
+        </fieldset>
 
     </form>
-
-
-
-
 
 </main>
 

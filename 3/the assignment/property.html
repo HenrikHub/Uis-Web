@@ -6,14 +6,15 @@
 
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
-<body>
 
+
+
+<body>
+<div class ="page-wrap">
 
 
 <header>
     <img src="https://goo.gl/k197Xs">
-
-
 
     <nav>
         <a href="index.html">Properties | </a>
@@ -22,21 +23,30 @@
     </nav>
 </header>
 
-<main>
 
-    <div id= "Property_Røros">
+
+
+
+
+
+
+<main>
+    <form action="checkout.html" method ="GET" id="Checkinn_Property1">
+    <div>
 
 
         <div class="box">
             <img src="images/property_1.png" alt="property 1">
             <h2>Holiday home røros</h2>
             <p> Some small details about the property<p>
-            <form action="checkout.html" id="Checkout_røros ">
-            <label> Check inn date: </label>
-            <input type= "date" name="checkInnDate">
-            <input type = "number" size ="3" min="1" max= "14" step = "1" value ="2">
-            <input type="submit">
-            </form>
+
+                <label> Check inn date:
+                    <input type= "date" name="InnDate_1">
+                    <input type = "number" size ="3" min="1"
+                           max= "14" step = "1" value ="2" name="days_1">
+                    <input type="submit">
+                </label>
+
         </div>
 
         <div class="box">
@@ -57,29 +67,24 @@
                 property_1property_1property_1property_1property_1property_1
                 property_1property_1property_1property_1property_1property_1</p>
 
-
-
-
         </div>
     </div>
 
+    </form>
+
+
 </main>
 
-<footer>
+</div>
+
+<footer class="site-footer" >
+
+    <p> tel: 94543223 <a href="mailto:someone@example.com"
+                         target= "_blank"> Contact mail</a> </p>
+
+
 
 </footer>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
