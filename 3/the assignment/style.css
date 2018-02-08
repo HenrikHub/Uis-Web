@@ -109,7 +109,10 @@ main h1{
 
 .column img p input{
     display:inline-block;
+    float:right;
 }
+
+
 .row{
     left:5%;
     right:5%;
@@ -154,6 +157,7 @@ footer{
     border-top-width:5px;
     background-color: #83AF9B;
     bottom:0;
+    text-align:center;
 
 }
 
