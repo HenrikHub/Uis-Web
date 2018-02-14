@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AddressBook</title>
+	<link rel="stylesheet" href="addressbook.css">
+	<script src="addressbook.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Address Book</h1>
+		</div>
+		<div class="quickadd"><button id="QuickAdd">+ Add</button></div>
+		<div class="quickaddForm">
+			<label for="navn">Name</label><input type="text" id="navn" class="formFields">
+			<label for="telefon">Phone</label><input type="number" required pattern="(/d+-())" id="telefon" class="formFields">
+			<label for="email">E-Mail</label><input type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" class="formFields">
+			<br><br>
+			<button id="Add">Add Now</button><button id="Cancel">Cancel</button>
+		</div>
+		<div>
+
+			<input type="text" id="myInput" onkeyup="myFunction()"
+				   placeholder="Search for names..">
+
+		</div>
+		<div class="addbook">
+			<!-- <div class="entry"
+				<div class="navn"><p>Ole nordman</p></div>
+				<div class="email"><p>ghfhgdfig@gmail.com</p></div>
+				<div class="telefon"><p>9316541</p></div>
+
+				<div class="del"><a href="#">Delete</a></div>
+			</div> -->
+
+
+		</div>
+
+	</div>
+
+
+</body>
+</html>

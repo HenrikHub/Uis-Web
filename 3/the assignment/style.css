@@ -55,17 +55,23 @@ header nav{
 }
 
 main{
-    margin: 2px;
+    position:static;
+   left:5%;
+    right:5%;
+    width:100%;
+
 }
 
 
 .mainimg{
     width:100%;
+    margin:0;
     border-bottom:solid 5px;
     border-top:solid 5px;
     z-index:0;
     min-width:800px;
     max-width:1200px;
+    max-height:500px;
 
 }
 
