@@ -12,6 +12,9 @@ General Fonts and colors:
 
 html, body{
     height:100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 body{
    font-family: "sans-serif";
@@ -23,6 +26,9 @@ body{
 
 h1,h2,h3 {
     font-family: "Montserrat",sans-serif;
+}
+h3{
+    margin:0;
 }
 
 p,a{
@@ -37,14 +43,18 @@ header{
     background-color: #83AF9B;
     margin-top:0;
     padding-top:0;
-    margin-bottom:100px;
     z-index: 1;
+
+
 
 }
 header img{
-    max-height:60px;
+    height:60px;
     left: 5%;
     position:fixed;
+    z-index:3;
+
+
 
 }
 
@@ -54,24 +64,36 @@ header nav{
 
 }
 
+header nav ul li{
+    display:inline-block;
+}
+
 main{
+    top:100px;
     position:static;
-   left:5%;
-    right:5%;
-    width:100%;
+
+   width:90%;
+    margin:auto;
+    min-width:800px;
+    max-width:1200px;
+
+
 
 }
 
 
 .mainimg{
     width:100%;
-    margin:0;
+    margin:auto;
     border-bottom:solid 5px;
     border-top:solid 5px;
     z-index:0;
+    position:relative;
+    /*
     min-width:800px;
     max-width:1200px;
-    max-height:500px;
+    */
+;
 
 }
 
@@ -80,50 +102,113 @@ main h1{
     font-size:1.2em;
     padding: 5px;
 }
+
+
+
 .box{
     position:relative;
-    left:5%;
-    right:5%;
-    width:90%;
-    min-width:800px;
-    max-width:1200px;
     border-style: solid;
     border-width: 1px;
     padding:5px;
     font-size:0.8em;
-    text-align:left;
+    display:inline;
+    width:100%;
+    float:left;
+}
+.box img{
+    height:100%;
+    float:left;
+}
+
+.checkinn{
+    bottom:0;
+    position:absolute;
+    float:left;
+    display:inline;
 
 }
+
 
 .column{
-    float:left;
-    width:45%;
+
+    width:47%;
+    min-width:400px;
+
     border-style: solid;
     border-width: 1px;
     padding:5px;
+    margin:10px;
     font-size:0.8em;
-
-
-
+    position:relative;
+    display:inline-block;
+    text-align:left;
 }
+
+.column:hover{
+    Background-color: orange;
+}
+
 
 .column img {
+    position: relative;
     width:200px;
     height:150px;
-    display:inline-block;
+    display:table;
+    float:left;
+    margin: 2px;
+}
+.propertyimages{
+    position: relative;
+    text-align: center;
+    color: red;
 }
 
-.column img p input{
-    display:inline-block;
-    float:right;
+.imagetext{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
+.column h3 input{
+    display:table;
+    float:left;
+    margin:2px;
+    position:relative;
+}
+.column p{
+    margin:2px;
+
+}
+
+.column input{
+    position:absolute;
+    bottom:0;
+    right:0;
+    outline-style:double;
+    border-width:1px;
+    border-style: dotted;
+    outline-width: 2px;
+    padding:5px;
+    margin:5px;
+}
+.column input:hover{
+    background-color:yellow;
+}
+
 
 
 .row{
-    left:5%;
-    right:5%;
+
     min-width:800px;
     max-width:1200px;
+
+    position:relative;
+    min-height:100%;
+    margin: 0 auto;
+    width:100%;
+    display:inline-block;
+    white-space:nowrap;
 }
 .row:after{
     content:"";
@@ -131,17 +216,25 @@ main h1{
     clear:both;
 }
 
-/*
-article{
+.labelalign label {
+   display:inline-block;
+    width:140px;
+    text-align:left;
+
+}
+
+
+.box2{
+    position:relative;
     border-style: solid;
     border-width: 1px;
     padding:5px;
-    font-size: 0.8em;
-    margin: 10px;
-    width:40%;
-    position:static;
-
+    font-size:0.8em;
+    width:100%;
+    float:left;
 }
+
+
 article img{
     margin-left:10px;
     width:200px;
@@ -155,16 +248,21 @@ article p{
 article input{
 }
 
-*/
+
 
 footer{
 
    height: 120px;
     border-top-width:5px;
     background-color: #83AF9B;
-    bottom:0;
+    line-height: 120px;
     text-align:center;
 
+}
+.site-footer p a{
+    line-height:1.5;
+    display:inline-block;
+    vertical-align:middle;
 }
 
 .page-wrap {
