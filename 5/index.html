@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Memory</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        .kort{
+            width:20%;
+            height:20%;
+            float:left;
+            margin:6px;
+            color:pink;
+            padding:4px;
+            border:solid 1px pink;
+        }
+        .kort p{
+            text-align:center;
+        }
+
+
+        #brett{
+            width: 500px;
+        }
+
+        .ned{
+            background:pink;
+        }
+
+        .clear{
+            clear:both;
+        }
+
+        p {
+            margin:0;
+            padding: 3px 12px 0 5px;
+
+        }
+
+        #Spillerinfo{
+            padding:14px 0 35px 0;
+        }
+
+        #player1 p, #player2 p{
+            float:left;
+        }
+
+        .active{
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+<div id="timer"></div>
+<div id="Spillerinfo" class="clear">
+    <div id="player1">
+        <p><strong>Player 1:</strong></p>
+        <p>Par matcha: <span class="noPairs">0</span></p>
+        <p>Antall klikk: <span class="noTurns">0</span></p>
+    </div>
+
+    <div id="player2" class="clear">
+        <p><strong>Player 2:</strong></p>
+        <p>Par matcha: <span class="noPairs">0</span></p>
+        <p>Antall klikk: <span class="noTurns">0</span></p>
+
+    </div>
+</div>
+<div id="brett">
+    <div class="kort ned en" data-face="1"></div>
+    <div class="kort ned to" data-face="2"></div>
+    <div class="kort ned tre" data-face="3"></div>
+    <div class="kort ned fire" data-face="4"></div>
+    <div class="kort ned fem" data-face="5"></div>
+    <div class="kort ned seks" data-face="6"></div>
+    <div class="kort ned syv" data-face="7"></div>
+    <div class="kort ned åtte" data-face="8"></div>
+    <div class="kort ned en" data-face="1"></div>
+    <div class="kort ned to" data-face="2"></div>
+    <div class="kort ned tre" data-face="3"></div>
+    <div class="kort ned fire" data-face="4"></div>
+    <div class="kort ned fem" data-face="5"></div>
+    <div class="kort ned seks" data-face="6"></div>
+    <div class="kort ned syv" data-face="7"></div>
+    <div class="kort ned åtte" data-face="8"></div>
+</div>
+<p class="clear"><a href="#" id="reset">Trykk her for aa restarte spillet</a></p>
+
+<script type="text/javascript">
+    function to_kort_vendt_opp(){
+        return $(".up").length == 2;
+    }
+
+    function matchene_kort(){
+        return $(".up:eq(0)").text() == $(".up:eq(1)").text();
+    }
+
+    function marker_matcha_kort(){
+        $(".up").each(function(){
+            $(this).addClass("matched").removeClass("up").off("click");
+        });
+    }
+
+    function Oppdater_score(player){
+        var el = $(player).find(".noPairs");
+        var p = Number(el.text());
+        el.text(p+1);
+    }
+
+    function alle_kort_matcha(){
+        return ($(".matched").length == 16)
+    }
+
+    function flip_kortene(){
+        setTimeout(function(){
+            $(".up").each(function(){
+                $(this).addClass("ned").removeClass("up");
+            });
+        }, 1000);
+    }
+
+    function shuffle(cards){
+        var i = cards.length, j, tempi, tempj;
+        if ( i == 0 ) return false;
+        while ( --i ) {
+            j = Math.floor( Math.random() * ( i + 1 ) );
+            tempi = cards[i];
+            tempj = cards[j];
+            cards[i] = tempj;
+            cards[j] = tempi;
+        }
+        return cards;
+    }
+
+    function Marker_spiller(player){
+        $("#Spillerinfo p").each(function(){
+            if ($(this).hasClass("active")){
+                $(this).removeClass("active");
+            }
+        });
+        $(player).find("p").first().addClass("active");
+    }
+
+    function Ekstra_omgang(player){
+        var le = $(player).find(".noTurns");
+        var k = Number(le.text());
+        le.text(k+2);
+    }
+
+    function oppdater_spiller(player){
+        gjeldene_spiller = (gjeldene_spiller.match(/1/))? "#player2" : "#player1"
+    }
+
+    function vinner(){
+        var playerOnePoints = Number($("#player1").find(".noPairs").text());
+        var playerTwoPoints = Number($("#player2").find(".noPairs").text());
+        if (playerOnePoints > playerTwoPoints){
+            return alert("Spiller1 vant!");
+        } else if (playerOnePoints < playerTwoPoints){
+            return alert("Spiller2 vant!");
+        } else {
+            return alert("Uavgjort!");
+        }
+    }
+
+
+    var cards = $(".kort");
+    cards.remove();
+    cards = shuffle(cards);
+    cards.appendTo($("#brett"));
+
+    // Main loop
+    $('.kort').on("click", function(){
+        if ($(".up").length == 2){
+            return false;
+        }
+
+        $(this).removeClass("ned").addClass("up");
+
+        if (to_kort_vendt_opp()){
+            Ekstra_omgang(gjeldene_spiller);
+            if (matchene_kort()){
+                marker_matcha_kort();
+                Oppdater_score(gjeldene_spiller);
+                if (alle_kort_matcha()){
+                    vinner();
+                }
+            }else{
+                flip_kortene();
+                oppdater_spiller(gjeldene_spiller);
+                setTimeout(function(){Marker_spiller(gjeldene_spiller)}, 1000);
+            }
+        }
+    });
+
+    $("#reset").click(function(){
+        location.reload();
+    });
+
+    $(".kort").each(function(){
+        var num = $(this).data("face");
+        $(this).text(num);
+    });
+
+
+    var timer = setInterval(clock, 1000);
+    var msec = 00;
+    var sec = 00;
+    var min = 00;
+
+    function clock() {
+        msec += 1;
+        if (msec == 60) {
+            sec += 1;
+            msec = 00;
+            if (sec == 60) {
+                sec = 00;
+                min += 1;
+                if (sec % 2 == 0) {
+                    alert("Pair");
+                }
+            }
+        }
+        document.getElementById("timer").innerHTML = min + ":" + sec + ":" + msec;
+    }
+
+    var gjeldene_spiller = "#player1";
+    Marker_spiller(gjeldene_spiller);
+</script>
+</body>
+</html>
