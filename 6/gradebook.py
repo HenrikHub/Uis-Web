@@ -13,6 +13,8 @@ class Gradebook(object):
 
     def __init__(self):
         self.__students = {}  # dict with student_no as key and name as value
+        self.__courses = {}
+        self.__semesters = {}
 
     def __create_folders(self):
         """Generates folder structure."""
@@ -30,8 +32,17 @@ class Gradebook(object):
                 self.__students[student_no] = name
 
         # Load courses
-
+        print("Loading courses.tsv ...")
+        with open("courses.tsv", "r") as f:
+            for line in f:
+                courses_no, name = line.strip().split("\t")
+                self.__courses[courses_no] = name
         # Load grades
+        print("Loading grades.tsv ...")
+        with open("grades.tsv", "r") as f:
+            for line in f:
+               semesters_no, courses_no = line.strip().split("\t")
+               self.__semesters[semesters_no] = name
 
     def __generate_student_files(self):
         """Generates HTML files for students."""
@@ -60,8 +71,21 @@ class Gradebook(object):
             f.write("</tbody>\n</table>\n")
 
             # list of courses
-
+            f.write("<h2>Courses</h2>")
+            f.write("<table>\n<thead>\n<tr><th>Courses no</th><th>Name</th></tr>\n</thead>\n<tbody>\n")
+            for courses_no, name in sorted(self.__courses.items()):
+                row = "<tr><td><a href=\"students/{student_no}.html\">{student_no}</a></td><td>{name}</td></tr>\n"
+                f.write(row.replace("{student_no}", courses_no).replace("{name}", name))
+            f.write("</tbody>\n</table>\n")
             # list of semesters
+           # f.write("<h2>Courses</h2>")
+            #f.write("<table>\n<thead>\n<tr><th>courses no</th><th>Name</th></tr>\n</thead>\n<tbody>\n")
+            #for courses_no, name in sorted(self.__courses.items()):
+           #     row = "<tr><td><a href=\"students/{student_no}.html\">{student_no}</a></td><td>{name}</td></tr>\n"
+           #     f.write(row.replace("{student_no}", courses_no).replace("{name}", name))
+            #f.write("</tbody>\n</table>\n")
+
+
 
             f.write(HTML_FRAME_BOTTOM)
 
