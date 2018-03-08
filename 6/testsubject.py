@@ -14,7 +14,7 @@ class Gradebook(object):
     def __init__(self):
         self.__students = {}  # dict with student_no as key and name as value
         self.__courses = {}
-        self.__grades = {}
+        self.__semesters = {}
 
     def __create_folders(self):
         """Generates folder structure."""
@@ -35,33 +35,35 @@ class Gradebook(object):
         print("Loading courses.tsv ...")
         with open("courses.tsv", "r") as f:
             for line in f:
-                courses_no, course_code = line.strip().split("\t")
-                self.__courses[courses_no] = course_code
+                courses_no, name = line.strip().split("\t")
+                self.__courses[courses_no] = name
         # Load grades
         print("Loading grades.tsv ...")
-        with open("grades.tsv", "r") as f:
-           for line in f:
-               student_no, course_code, semester, grade = line.strip().split("\t")
-               self.__grades[semester] = course_code
+        #with open("grades.tsv", "r") as f:
+          #  for line in f:
+         #      semesters_no, courses_no = line.strip().split("\t")
+           #    self.__semesters[semesters_no] = name
 
     def __generate_student_files(self):
         """Generates HTML files for students."""
         print("Generating index file ...")
-        with open("output/students/{student_no}.html", "w") as f:
-            f.write(HTML_FRAME_TOP.replace("{title}", "Student").replace("{css_path}", "output/"))
+        with open("output/students/student.html", "w") as f:
+            f.write(HTML_FRAME_TOP.replace("{title}", "Gradebook Index").replace("{css_path}", "../"))
 
             # list of students
             f.write("<h1>Student</h1>")
-            f.write("<table>\n<tr><td><strong>Student no:</td><td>{student_no}</td></tr>\n")
-            f.write("<tr><td><strong>Name:</td><td>{student_name}</td></tr>\n")
+            f.write("<table>\n<tr><td><strong>Student no:</td><td>numberhere</td></tr>\n")
+            f.write("<tr><td><strong>Name:</td><td>namehere</td></tr>\n")
             f.write("</table><br /> \n <table> \n <thead> \n ")
             f.write("<tr> <th> Course code </th> <th> Name </th> <th> Grade </th> </tr> \n </thead> \n <tbody> \n")
-            for student_no, student_name in sorted(self.__students.items()):
-                row1 = "<tr><td colspan='3'><em>{semester}</em></td><tr>\n"
-                f.write(row1.replace("{student_no}", student_no).replace("{name}", student_name))
-                #row2 = "<tr><td><{course_no}</td><td> {course_code} </td> <td> grade </td> </tr>"
-              #  f.write(row2.replace("{course_code}", course_code).replace("{name}", student_name))
+            for student_no, name in sorted(self.__students.items()):
+                row1 = "<tr><td colspan="
+                3
+                "><em>{semester}</em></td><tr>\n"
+                f.write(row1.replace("{student_no}", student_no).replace("{name}", name))
 
+            row2 = "<tr><td>]course_no}</td><td> name </td> <td> grade </td> </tr>"
+            f.write(row2.replace("{course_no}", course_no).replace("{name}", name))
             f.write("</tbody>\n</table>\n")
 
             f.write(HTML_FRAME_BOTTOM)
@@ -93,17 +95,17 @@ class Gradebook(object):
             # list of courses
             f.write("<h2>Courses</h2>")
             f.write("<table>\n<thead>\n<tr><th>Courses no</th><th>Name</th></tr>\n</thead>\n<tbody>\n")
-            for courses_no, course_code in sorted(self.__courses.items()):
+            for courses_no, name in sorted(self.__courses.items()):
                 row = "<tr><td><a href=\"students/{student_no}.html\">{student_no}</a></td><td>{name}</td></tr>\n"
-                f.write(row.replace("{student_no}", courses_no).replace("{name}", course_code))
+                f.write(row.replace("{student_no}", courses_no).replace("{name}", name))
             f.write("</tbody>\n</table>\n")
             # list of semesters
-            f.write("<h2>Semesters</h2>")
-            f.write("<table>\n<thead>\n<tr><th>Semester</th><th>Courses</th></tr>\n</thead>\n<tbody>\n")
-            for semester, course_code in sorted(self.__grades.items()):
-                row = "<tr><td><a href=\"semesters/{semester}.html\">{semester}</a></td><td><a href=\"courses/{course_code}\">{course_code}</a></td></tr>\n"
-                f.write(row.replace("{semester}", semester).replace("{course_code}", course_code))
-            f.write("</tbody>\n</table>\n")
+           # f.write("<h2>Courses</h2>")
+            #f.write("<table>\n<thead>\n<tr><th>courses no</th><th>Name</th></tr>\n</thead>\n<tbody>\n")
+            #for courses_no, name in sorted(self.__courses.items()):
+           #     row = "<tr><td><a href=\"students/{student_no}.html\">{student_no}</a></td><td>{name}</td></tr>\n"
+           #     f.write(row.replace("{student_no}", courses_no).replace("{name}", name))
+            #f.write("</tbody>\n</table>\n")
 
 
 
