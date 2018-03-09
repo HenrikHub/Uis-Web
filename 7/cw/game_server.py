@@ -25,7 +25,7 @@ def reg(team_id):
     """Registers a new team."""
     game = app.config["GAME"]
     resp = {}
-    if team_id and team_id.isalnum() and len(team_id) <= 10:
+    if team_id and len(team_id) <= 25:
         if game.get_status_code() < 200:
             if game.get_player(team_id) > 0:  # team_id is taken
                 resp = {"response": "ERROR", "error_code": 2}
