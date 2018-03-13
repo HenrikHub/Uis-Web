@@ -1,3 +1,4 @@
+
 """
 Class representing the board.
 
