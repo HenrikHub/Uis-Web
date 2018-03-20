@@ -51,9 +51,13 @@ def play(player):
 
                 lastmove = status["last_move"]
                 ##lastmovexy = [int(s) for s in lastmove.split() if s.isdigit()]
-                x = int(lastmove.split(",")[0])
-                y = int(lastmove.split(",")[1])
-                area = status["board"][x][y]
+
+                ## Converting list to string
+                x = ''.join((lastmove.split(",")[0]))
+                y = ''.join((lastmove.split(",")[1]))
+                int_x = int(lastmove.split(",")[0])
+                int_y = int(lastmove.split(",")[1])
+                area = status["board"][int_y][int_x]
 
                 if area < 16:
                     if area == 1 or area == 2 or area == 4 or area == 8:
@@ -78,6 +82,7 @@ def play(player):
 
                     print("Making a move: ({},{}) {}".format(x, y, border))
                     move = str(x) + "," + str(y) + "," + border
+                    time.sleep(0.5)  # wait a bit before making a new status request
                     status = requests.get(SERVER + "/move/" + TEAM_ID + "/" + move).json()
 
                 elif area >= 16:
@@ -107,9 +112,10 @@ def play(player):
                         elif minstearea == 14:
                             border = ["top"]
 
-                print("Making a move: ({},{}) {}".format(x, y, border))
-                move = str(x) + "," + str(y) + "," + border
-                status = requests.get(SERVER + "/move/" + TEAM_ID + "/" + move).json()
+                    print("Making a move: ({},{}) {}".format(x, y, border))
+                    move = str(x) + "," + str(y) + "," + border
+                    time.sleep(0.5)  # wait a bit before making a new status request
+                    status = requests.get(SERVER + "/move/" + TEAM_ID + "/" + move).json()
 
 
             else:
@@ -118,6 +124,7 @@ def play(player):
                 border = ["top", "right", "bottom", "left"][random.randint(0,3)]
                 print("Making a move: ({},{}) {}".format(x, y, border))
                 move = str(x) + "," + str(y) + "," + border
+                time.sleep(0.5)  # wait a bit before making a new status request
                 status = requests.get(SERVER + "/move/" + TEAM_ID + "/" + move).json()
 
 
