@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="placeholder">
+    Property listing (to be generated from the database)
+    <ul>
+        <li><a href="{{ url_for("property", property_id=1) }}">Property 1</a></li>
+        <li><a href="{{ url_for("property", property_id=2) }}">Property 2</a></li>
+        <li><a href="{{ url_for("property", property_id=3) }}">Property 3</a></li>
+        <li>...</li>
+    </ul>
+</div>
+{% endblock %}

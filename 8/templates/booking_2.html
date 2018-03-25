@@ -1,0 +1,12 @@
+{% extends "booking.html" %}
+{% block booking %}
+<h3>Confirmation</h3>
+Display booking details (property and customer) here.
+<br />
+<br />
+<form action="{{ url_for("book") }}" method="POST">
+    <input type="hidden" name="action" value="do_2" />
+    <input type="checkbox" name="confirm" value="1">I confirm this booking and agree to the terms & conditions<br />
+    <input type="submit" value="Confirm booking"/>
+</form>
+{% endblock %}

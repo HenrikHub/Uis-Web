@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %} | Property #{{ property.property_id }} {% endblock %}
+{% block content %}
+    {# TODO: Show property page #}
+
+    <div class="placeholder">
+        <h2>Property page</h2>
+        Details for property #{{ property.property_id }} come here
+        <br/>
+        <br/>
+        <form action="{{ url_for("book") }}" method="POST">
+            <input type="hidden" name="property_id" value="{{ property.property_id }}"/>
+            <label>Check-in: <input type="date" name="checkin" size="10"></label>
+            <label></label>Nights:
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select></label>
+            <input type="submit" value="Book property">
+        </form>
+    </div>
+
+{% endblock %}
