@@ -6,10 +6,11 @@ Game AI -- this is for you to complete
 import requests
 import time
 import random
+import numpy as np
 
 
 SERVER = "http://127.0.0.1:5000"  # this will not change
-TEAM_ID = "HenrikHub2"  # set it to your GitHub username
+TEAM_ID = "HenrikcxzcHub"  # set it to your GitHub username
 
 
 def reg():
@@ -36,7 +37,7 @@ def reg():
 def play(player):
     game_over = False
     while not game_over:
-        time.sleep(0.2)  # wait a bit before making a new status request
+        time.sleep(0.5)  # wait a bit before making a new status request
         status = requests.get(SERVER + "/status").json()  # request the status of the game
         if status["status_code"] > 300:
             game_over = True
@@ -47,8 +48,8 @@ def play(player):
 
             if status["last_move"] != "":
 
-                border = []
-
+                border = ""
+                time.sleep(0.2)
                 lastmove = status["last_move"]
                 ##lastmovexy = [int(s) for s in lastmove.split() if s.isdigit()]
 
@@ -59,58 +60,88 @@ def play(player):
                 int_y = int(lastmove.split(",")[1])
                 area = status["board"][int_y][int_x]
 
-                if area < 16:
-                    if area == 1 or area == 2 or area == 4 or area == 8:
-                        if area == 1:
-                            border = ["right","bottom", "left"][random.randint(0,2)]
-                        elif area == 2:
-                            border = ["top","bottom", "left"][random.randint(0,2)]
-                        elif area == 4:
-                            border = ["top","right", "left"][random.randint(0,2)]
-                        elif area == 8:
-                            border = ["top","right", "bottom"][random.randint(0,2)]
+                if area == 1 or area == 2 or area == 4 or area ==8 or area == 7 or area == 11 or area == 13 or area == 14:
 
-                    elif area == 7 or area == 11 or area == 13 or area == 14:
-                        if area == 7:
-                            border = ["left"]
-                        elif area == 11:
-                            border = ["bottom"]
-                        elif area == 13:
-                            border = ["right"]
-                        elif area == 14:
-                            border = ["top"]
+                    if area == 1:
+                        border = ["right","bottom", "left"][random.randint(0,2)]
+                        border = ''.join(border)
+                    elif area == 2:
+                        border = ["top","bottom", "left"][random.randint(0,2)]
+                        border = ''.join(border)
+                    elif area == 4:
+                        border = ["top","right", "left"][random.randint(0,2)]
+                        border = ''.join(border)
+                    elif area == 8:
+                        border = ["top","right", "bottom"][random.randint(0,2)]
+                        border = ''.join(border)
+
+
+                    if area == 7:
+                        border = "left"
+                    elif area == 11:
+                        border = "bottom"
+                    elif area == 13:
+                        border = "right"
+                    elif area == 14:
+                        border = "top"
 
                     print("Making a move: ({},{}) {}".format(x, y, border))
                     move = str(x) + "," + str(y) + "," + border
                     time.sleep(0.5)  # wait a bit before making a new status request
                     status = requests.get(SERVER + "/move/" + TEAM_ID + "/" + move).json()
 
-                elif area >= 16:
+                else:
+                    numpyarray = np.array(status["board"])
 
-                    minstearea = status["board"].min()
-                    xy = status["board"].index(status["board"].min ) ## Posisjonen til det minste tall i matrixen board
-                    x = xy[0]
-                    y = xy[1]
+                    minstearea = np.min(numpyarray)
+                    x2 = [x2 for x2 in status["board"] if minstearea in x2][0]
+                    xy = (status["board"].index(x2), x2.index(minstearea))
+                    x = str(xy[1])
+                    y = str(xy[0])
 
-                    if minstearea == 1 or minstearea == 2 or minstearea == 4 or minstearea == 8:
-                        if minstearea == 1:
+                    if minstearea == 0:
+                        border = ["top", "right", "bottom", "left"][random.randint(0, 3)]
+
+                    elif minstearea == 1:
                             border = ["right", "bottom", "left"][random.randint(0, 2)]
-                        elif minstearea == 2:
+                            border = ''.join(border)
+                    elif minstearea == 2:
                             border = ["top", "bottom", "left"][random.randint(0, 2)]
-                        elif minstearea == 4:
+                            border = ''.join(border)
+                    elif minstearea == 4:
                             border = ["top", "right", "left"][random.randint(0, 2)]
-                        elif minstearea == 8:
+                            border = ''.join(border)
+                    elif minstearea == 8:
                             border = ["top", "right", "bottom"][random.randint(0, 2)]
+                            border = ''.join(border)
 
-                    elif minstearea == 7 or minstearea == 11 or minstearea == 13 or minstearea == 14:
-                        if minstearea == 7:
-                            border = ["left"]
-                        elif minstearea == 11:
-                            border = ["bottom"]
-                        elif minstearea == 13:
-                            border = ["right"]
-                        elif minstearea == 14:
-                            border = ["top"]
+                    elif minstearea == 3:
+                        border = ["bottom", "left"][random.randint(0, 1)]
+                        border = ''.join(border)
+                    elif minstearea == 5:
+                            border = ["right","left"][random.randint(0, 1)]
+                            border = ''.join(border)
+                    elif minstearea == 6:
+                            border = ["top","left"][random.randint(0, 1)]
+                            border = ''.join(border)
+                    elif minstearea == 9:
+                            border = ["right", "bottom"][random.randint(0, 1)]
+                            border = ''.join(border)
+                    elif minstearea == 10:
+                            border = ["top","bottom"][random.randint(0, 1)]
+                            border = ''.join(border)
+                    elif minstearea == 12:
+                        border = ["top", "right"][random.randint(0, 1)]
+                        border = ''.join(border)
+
+                    elif minstearea == 7:
+                            border = "left"
+                    elif minstearea == 11:
+                            border = "bottom"
+                    elif minstearea == 13:
+                            border = "right"
+                    elif minstearea == 14:
+                            border = "top"
 
                     print("Making a move: ({},{}) {}".format(x, y, border))
                     move = str(x) + "," + str(y) + "," + border
