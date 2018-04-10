@@ -6,20 +6,35 @@
     <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
 </head>
 <body>
-    {# NOTE: This is the file that contains your layout. All other template files should extend this one. #}
 
-    <div class="placeholder static">
-        <h1>Header</h1>
-        <div>
-        Navigation menu: <a href="{{ url_for("index") }}">index</a>
-        </div>
+    <header>
+
+        <div class="placeholder static">
+            <h1>Header</h1>
+            <div>
+                Navigation menu: <a href="{{ url_for("index") }}">index</a>
+            </div>
     </div>
 
-    {% if msg is defined %}<div class="placeholder message">{{ msg }}</div>{% endif %}
-    {% if err is defined %}<div class="placeholder error">{{ err }}</div>{% endif %}
+    </header>
 
-    {% block content %}{% endblock %}
+    <main>
 
-    <div class="placeholder static">Footer</div>
+        {% if msg is defined %}<div class="placeholder message">{{ msg }}</div>{% endif %}
+        {% if err is defined %}<div class="placeholder error">{{ err }}</div>{% endif %}
+
+        {% block content %}{% endblock %}
+
+
+    </main>
+
+    <footer>
+
+        <div class="placeholder static">Footer</div>
+
+    </footer>
+    {# NOTE: This is the file that contains your layout. All other template files should extend this one. #}
+
+
 </body>
 </html>
