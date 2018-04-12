@@ -1,28 +1,38 @@
 {% extends "layout.html" %}
-{% block title %} | Property #{{ property.property_id }} {% endblock %}
+{% block title %} | Property #{{ property.ID }} {% endblock %}
 {% block content %}
-    {# TODO: Show property page #}
 
-    <div class="placeholder">
-        <h2>Property page</h2>
-        Details for property #{{ property.property_id }} come here
-        <br/>
-        <br/>
-        <form action="{{ url_for("book") }}" method="POST">
-            <input type="hidden" name="property_id" value="{{ property.property_id }}"/>
-            <label>Check-in: <input type="date" name="checkin" size="10"></label>
-            <label></label>Nights:
-            <select>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select></label>
-            <input type="submit" value="Book property">
-        </form>
+<div class="framed">
+    <div class="prop_left">
+        <img src="/static/images/{{ property.photo }}" alt="Property {{ property.ID }}" width="190px"/>
+
+        <div class="place">{{ property.location }}</div>
     </div>
+    <div class="prop_right">
+        <h3>{{ property.name }}</h3>
+
+        <p>{{ property.description }}</p>
+    </div>
+    <div class="prop_booking">
+        <form action="{{ url_for('book') }}" method="POST">
+            <input type="hidden" name="property_id" value="{{ property.ID }}"/>
+            <table>
+                <tr>
+                    <td>Checkin:</td>
+                    <td><input type="date" name="checkin" size="9"></td>
+                    <td>Checkout:</td>
+                    <td><input type="date" name="checkout" size="9"></td>
+                    <td><input type="submit" value="Book property"></td>
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+</div>
+
+<h1>Details</h1>
+
+<div class="framed">{{ property.details }}</div>
 
 {% endblock %}

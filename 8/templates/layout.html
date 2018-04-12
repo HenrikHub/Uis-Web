@@ -3,38 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>My Booking Site{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
     <header>
-
-        <div class="placeholder static">
-            <h1>Header</h1>
-            <div>
-                Navigation menu: <a href="{{ url_for("index") }}">index</a>
-            </div>
+    <div id="logo">
+        <h1>MyBooking</h1>
     </div>
-
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">index</a></li>
+            <li><a href="{{ url_for('property', property_id=1) }}">Special deals</a></li>
+        </ul>
+    </nav>
     </header>
 
     <main>
-
         {% if msg is defined %}<div class="placeholder message">{{ msg }}</div>{% endif %}
-        {% if err is defined %}<div class="placeholder error">{{ err }}</div>{% endif %}
-
+    {% if err is defined %}<div class="placeholder error">{{ err }}</div>{% endif %}
         {% block content %}{% endblock %}
-
-
     </main>
 
     <footer>
-
-        <div class="placeholder static">Footer</div>
-
-    </footer>
-    {# NOTE: This is the file that contains your layout. All other template files should extend this one. #}
-
-
+    <div class="contact">
+        <span class="strong">Customer service:</span> |
+        +47 321 09 87654 |
+        <a href="#">contact@noreply.com</a>
+    </div>
+</footer>
 </body>
 </html>

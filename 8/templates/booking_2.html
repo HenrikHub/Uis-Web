@@ -1,12 +1,63 @@
 {% extends "booking.html" %}
 {% block booking %}
 <h3>Confirmation</h3>
-Display booking details (property and customer) here.
-<br />
-<br />
-<form action="{{ url_for("book") }}" method="POST">
+<form action="{{ url_for('book') }}" method="POST">
     <input type="hidden" name="action" value="do_2" />
-    <input type="checkbox" name="confirm" value="1">I confirm this booking and agree to the terms & conditions<br />
-    <input type="submit" value="Confirm booking"/>
+    <input type="hidden" name="property_id" value="{{ property.ID }}"/>
+    <input type="hidden" name="checkin" value="{{ date_from }}">
+    <input type="hidden" name="checkout" value="{{ date_to }}">
+    <input type="hidden" name="name" value="{{ name }}">
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="hidden" name="phone" value="{{ phone }}">
+    <input type="hidden" name="street" value="{{ street }}">
+    <input type="hidden" name="city" value="{{ city }}">
+    <input type="hidden" name="postcode" value="{{ postcode }}">
+    <input type="hidden" name="comment" value="{{ comment }}">
+    <input type="hidden" name="country" value="{{ country }}">
+    <fieldset class="framed">
+        <div>
+            <label for="checkin">Check-in:</label>
+            <input type="text" name="checkin" id="checkin" size="10" value="{{ date_from }}" disabled>
+        </div>
+        <div>
+            <label for="checkout">Check-out:</label>
+            <input type="text" name="checkout" id="checkout" size="10" value="{{date_to }}" disabled>
+        </div>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" size="30" value="{{ name }}" disabled>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email"size="30" value="{{ email }}" disabled>
+        </div>
+        <div>
+            <label for="phone">Telephone:</label>
+            <input type="tel" name="phone" id="phone"size="30" value="{{ phone }}" disabled>
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" name="street" id="street" size="30" value="{{ street }}" disabled>
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" size="20" value="{{ city }}" disabled>
+        </div>
+        <div>
+            <label for="postcode">Postcode:</label>
+            <input type="text" name="postcode" id="postcode" size="5" value="{{ postcode }}" disabled>
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <input type="text" name="country" id="country" value="{{ country }}" disabled>
+        </div>
+        <label for="comment">Comment</label>
+        <textarea name="comment" id="comment" cols="30" rows="4" disabled>{{ comment }}</textarea>
+    </fieldset>
+
+    <fieldset class="framed centered">
+        <input type="checkbox" name="confirm" value="1">I confirm the booking and  I also agree to the <a href="{{ url_for('termsconditions') }}" target="_blank">terms & conditions</a><br />
+        <input type="submit" value="Confirm booking"/>
+    </fieldset>
 </form>
 {% endblock %}

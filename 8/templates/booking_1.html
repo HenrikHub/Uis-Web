@@ -1,10 +1,65 @@
 {% extends "booking.html" %}
 {% block booking %}
 <h3>Personal details</h3>
-(name, email, address, etc.)
-
-<form action="{{ url_for("book") }}" method="POST">
+<form action="{{ url_for('book') }}" method="POST">
     <input type="hidden" name="action" value="do_1" />
-    <input type="submit" value="Book property"/>
+    <input type="hidden" name="property_id" value="{{ property.ID }}"/>
+    <input type="hidden" name="checkin" value="{{ date_from }}">
+    <input type="hidden" name="checkout" value="{{ date_to }}">
+    <fieldset class="framed">
+        <div>
+            <label for="checkin">Check-in:</label>
+            <input type="text" name="checkin" id="checkin" size="10" value="{{ date_from }}" disabled>
+        </div>
+        <div>
+            <label for="checkout">Check-out:</label>
+            <input type="text" name="checkout" id="checkout" size="10" value="{{ date_to }}" disabled>
+        </div>
+    </fieldset>
+
+    <fieldset class="framed">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" size="30" required>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email"size="30" required>
+        </div>
+        <div>
+            <label for="phone">Telephone:</label>
+            <input type="tel" name="phone" id="phone"size="30" required>
+        </div>
+        <div>
+            <label for="street">Street:</label>
+            <input type="text" name="street" id="street" size="30" required>
+        </div>
+        <div>
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" size="20" required>
+        </div>
+        <div>
+            <label for="postcode">Postcode:</label>
+            <input type="text" name="postcode" id="postcode" size="5" required>
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <select name="country" id="country" required>
+                <option value="NO">Norway</option>
+                <option value="SE">Sweden</option>
+                <option value="DK">Denmark</option>
+                <option value="--">Other</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <fieldset class="framed">
+        <label for="comment">Comment</label>
+        <textarea name="comment" id="comment" cols="30" rows="4"></textarea>
+    </fieldset>
+
+    <fieldset class="framed centered">
+        <input type="submit" value="Book property">
+    </fieldset>
 </form>
 {% endblock %}

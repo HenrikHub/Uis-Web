@@ -1,7 +1,22 @@
 {% extends "layout.html" %}
+{% block title %} | Booking{% endblock %}
 {% block content %}
-<div class="placeholder">
-    <h2>Booking</h2>
-    {% block booking %}{% endblock %}
+
+<div class="framed">
+    <div class="prop_left">
+        <img src="/static/images/{{ property.photo }}" alt="Property {{ property.ID }}" width="200px"/>
+
+        <div class="place">{{ property.location }}</div>
+    </div>
+    <div class="prop_right">
+        <h3>{{ property.name }}</h3>
+
+        <p>{{ property.description }}</p>
+    </div>
 </div>
+
+<h1>Checkout</h1>
+
+{% block booking %}{% endblock %}
+
 {% endblock %}

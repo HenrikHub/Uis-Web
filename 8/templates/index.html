@@ -1,12 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="placeholder">
-    Property listing (to be generated from the database)
-    <ul>
-        <li><a href="{{ url_for("property", property_id=1) }}">Property 1</a></li>
-        <li><a href="{{ url_for("property", property_id=2) }}">Property 2</a></li>
-        <li><a href="{{ url_for("property", property_id=3) }}">Property 3</a></li>
-        <li>...</li>
-    </ul>
-</div>
+<img src="/static/images/background.jpg" alt="Skiing destinations" class="banner"/>
+<h1>Properties</h1>
+
+{% for property in properties|sort(attribute='ID') %}
+
+<article class="framed column">
+    <div class="prop_left">
+        <img src="static/images/{{ property.photo }}" alt="Property {{ property.ID }}" width="200px"/>
+
+        <div class="place">{{ property.location }}</div>
+    </div>
+    <div class="prop_right">
+        <h3>{{ property.name }}</h3>
+
+        <p>{{ property.description }}</p>
+    </div>
+    <a href="{{ url_for('property', property_id=property['ID']) }}">
+        <div class="details">Details</div>
+    </a>
+</article>
+{% endfor %}
+
 {% endblock %}
